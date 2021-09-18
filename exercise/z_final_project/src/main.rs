@@ -52,18 +52,58 @@ fn main() {
 
         // **OPTION**
         // Brighten -- see the brighten() function below
+        "brighten" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            brighten(infile, outfile);
+        }
 
         // **OPTION**
         // Crop -- see the crop() function below
+        "crop" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            crop(infile, outfile);
+        }
 
         // **OPTION**
         // Rotate -- see the rotate() function below
+        "rotate" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            rotate(infile, outfile);
+        }
 
         // **OPTION**
         // Invert -- see the invert() function below
+        "invert" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            invert(infile, outfile);
+        }
 
         // **OPTION**
         // Grayscale -- see the grayscale() function below
+        "grayscale" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            grayscale(infile, outfile);
+        }
 
         // A VERY DIFFERENT EXAMPLE...a really fun one. :-)
         "fractal" => {
@@ -76,6 +116,13 @@ fn main() {
 
         // **OPTION**
         // Generate -- see the generate() function below -- this should be sort of like "fractal()"!
+        "generate" => {
+            if args.len() != 1 {
+                print_usage_and_exit();
+            }
+            let outfile = args.remove(0);
+            generate(outfile);
+        }
 
         // For everything else...
         _ => {
@@ -112,6 +159,9 @@ fn brighten(infile: String, outfile: String) {
 
     // Challenge: parse the brightness amount from the command-line and pass it
     // through to this function.
+    let img = image::open(infile).expect("Failed to open INFILE.");
+    let img_t = img.brighten(2);
+    img_t.save(outfile).expect("Failed writing OUTFILE.");
 }
 
 fn crop(infile: String, outfile: String) {
